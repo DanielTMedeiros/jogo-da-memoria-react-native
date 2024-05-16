@@ -66,21 +66,22 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.grid}>
-        {gameWon && (
-          <Text style={styles.congratsMessage}>
-            Parabéns! Você venceu o jogo!
-          </Text>
-        )}
-        {cartas.map((carta, indice) => (
-          <TouchableOpacity key={indice} onPress={() => flipCard(indice)}>
-            <Image
-              style={styles.image}
-              source={carta.faceUp ? carta.source : imgCover}
-            />
-          </TouchableOpacity>
-        ))}
-      </View>
+      {gameWon ? (
+        <Text style={styles.congratsMessage}>
+          Parabéns! Você venceu o jogo!
+        </Text>
+      ) : (
+        <View style={styles.grid}>
+          {cartas.map((carta, indice) => (
+            <TouchableOpacity key={indice} onPress={() => flipCard(indice)}>
+              <Image
+                style={styles.image}
+                source={carta.faceUp ? carta.source : imgCover}
+              />
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
     </View>
   );
 };
@@ -97,22 +98,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    width: 170,
-    height: 170,
+    width: 150,
+    height: 150,
     marginBottom: 6,
     marginLeft: 6,
     backgroundColor: "#fff",
   },
   congratsMessage: {
-    flex: 1,
-    backgroundColor: "white",
     fontSize: 24,
     color: "blue",
     padding: 20,
-    zIndex: 1,
-    top: 50,
     textAlign: "center",
-    position: "absolute",
   },
 });
 
